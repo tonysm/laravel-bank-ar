@@ -44,6 +44,20 @@ services:
             - sail
         healthcheck:
           test: ["CMD", "mysqladmin", "ping"]
+    mysql.test:
+        image: 'mysql:8.0'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        tmpfs:
+            - '/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+          test: ["CMD", "mysqladmin", "ping"]
 #    pgsql:
 #        image: postgres:13
 #        ports:
